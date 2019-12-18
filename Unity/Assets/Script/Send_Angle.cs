@@ -10,8 +10,8 @@ public class Send_Angle : MonoBehaviour
 {
     public GameObject background;
 
-    public string portName = "COM4";
-    public int baudRate = 115200;
+    public string portName = "COM7";
+    public int baudRate = 57600;
 
 
 
@@ -43,11 +43,11 @@ public class Send_Angle : MonoBehaviour
         for (uint i = 0; i < clock_array.Length; i++)
         {
             GameObject parent = clock_array[i];
+			Big_Hand_Clock bclock = parent.GetComponentInChildren<Big_Hand_Clock>();
             Small_Hand_Clock sclock = parent.GetComponentInChildren<Small_Hand_Clock>();
-            Big_Hand_Clock bclock = parent.GetComponentInChildren<Big_Hand_Clock>();
-            buffer[j] = (int)sclock.angle +180 ; //cast to int+ get rid of negative angles
+            buffer[j] = (int)bclock.angle +180 ; //cast to int+ get rid of negative angles
             j++;
-            buffer[j] = (int)bclock.angle +180 ;
+            buffer[j] = (int)sclock.angle +180 ;
             j++;
         }
         buffer[j] = 420; //stop signal
@@ -82,11 +82,6 @@ public class Send_Angle : MonoBehaviour
 
         stream.Close();
 
-    }
-
-    private void OnApplicationQuit()
-    {
-        stream.Close();
     }
 
     public void ThreadLoop()

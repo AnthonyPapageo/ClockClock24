@@ -17,8 +17,10 @@ public class DEBUG : MonoBehaviour
             GameObject parent = clock_array[i];
             Small_Hand_Clock sclock = parent.GetComponentInChildren<Small_Hand_Clock>(); 
             Big_Hand_Clock bclock = parent.GetComponentInChildren<Big_Hand_Clock>();
-            print("Clock " + (i+1).ToString() + " small angle = " + sclock.angle.ToString());
-            print("Clock " + (i+1).ToString() + " big angle = " + bclock.angle.ToString());
+            print("Clock " + (i + 1).ToString() + " big angle = " + (bclock.angle + 180f).ToString());
+            print("Clock " + (i+1).ToString() + " small angle = " + (sclock.angle +180f).ToString());
+             
+           
         }
     }
 

@@ -9,6 +9,8 @@ public class Text_Changer : MonoBehaviour
     public GameObject background;
     public uint x;
     public uint y;
+    public int N = 1;
+
 
     public void ChangeText(string s)
     {
@@ -20,8 +22,14 @@ public class Text_Changer : MonoBehaviour
         Destroy(gameObject);
         Main m = background.GetComponent<Main>();
         m.matrice[x, y] = false;
-        //m.decrementCounter();
+        m.decrementCounter();
     }
+    /*public void Die()
+    {
+        Destroy(gameObject);
+        Main m = background.GetComponent<Main>();
+        m.matrice[x, y] = false;
+    }*/
 
     public void EnableTopPlus(bool b)
     {

@@ -29,8 +29,6 @@ void setup()
   Wire.begin(getAddress()); //set slave address
   myStepperBig.setSpeed(200);
   myStepperSmall.setSpeed(200);
-  myStepperBig.step(720); //2 step per deg
-  myStepperSmall.step(720);
   Wire.onReceive(recieveEvent); //read the angles
 
 }
@@ -42,13 +40,13 @@ void loop()
     int16_t angleToDo1;
     int16_t angleToDo2;
     angleToDo1 = tabAngle[0] - tabOldAngle[0];
-    angleToDo2 = tabAngle[1] - tabOldAngle[1];
     tabOldAngle[0] = tabAngle[0]; //save new angle
-    tabOldAngle[1] = tabAngle[1];
     Serial.println("Caluclated value are");
     Serial.println(angleToDo1);
-    Serial.println(angleToDo2);
     myStepperBig.step(angleToDo1 * 2); //2 step per deg
+    angleToDo2 = tabAngle[1] - tabOldAngle[1];
+    tabOldAngle[1] = tabAngle[1];
+    Serial.println(angleToDo2);
     myStepperSmall.step(angleToDo2 * 2);
     valueRecieved = false;
   }

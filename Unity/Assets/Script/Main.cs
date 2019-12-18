@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public uint i = 1;
+    public int i = 1;
     public bool[,] matrice = new bool[16,16];
 
     private void Update()
@@ -56,26 +56,36 @@ public class Main : MonoBehaviour
         }
     }
 
-    public uint getNextName()
+    public int getNextName()
     {
-        uint result = 2; //first name created is Clock_2
+        int temp = 1;
+        bool found = false;
         GameObject[] clock_array = GameObject.FindGameObjectsWithTag("clock");
         //first clock is clockUI
-        for (uint i = 1; i<clock_array.Length; i++) //get a name
-        {                   
-            string temp = "Clock_" + (i+1).ToString();
-            for(uint j = 1; j < clock_array.Length; j++) //compare with everyclock
+        if(clock_array.Length == 1 )
+        {
+            return 2; //we create clock2
+        }
+        for (int i = 1; i<32; i++) //get a name
+        {
+            GameObject clock = GameObject.Find("Clock_" + i.ToString());
+            if (clock == null)
             {
-                if (!string.Equals(temp, clock_array[j]))
-                {
-
-                }
+                temp = i;
+                found = true;
+                break;
             }
-            
-                
+        }
+        if(found) //we found a hole in the name
+        {
+            return temp;
+        }
+        else //it's the last clock
+        {
+            return clock_array.Length + 1;
         }
 
-        return result;
+        
     }
 
     public GameObject[] get_Array_Clock()
@@ -83,5 +93,6 @@ public class Main : MonoBehaviour
         GameObject[] clock_array = GameObject.FindGameObjectsWithTag("clock");
         return clock_array;
     }
+
 
 }

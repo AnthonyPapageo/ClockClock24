@@ -12,30 +12,31 @@ public class Add_Clock_Plus : MonoBehaviour
 
     public void AddObjectRight()
     {
-   
+
         GameObject base_clock;
         Vector3 base_position;
 
         c = GameObject.FindWithTag("BaseCanvas");
         Main m = background.GetComponent<Main>();
 
- 
+
         Transform base_transform = gameObject.transform.parent;
         base_clock = base_transform.gameObject;
         base_position = base_clock.transform.position;
-        base_position += 100 * Vector3.right;  
+        base_position += 100 * Vector3.right;
 
-        m.incrementCounter(); 
+        m.incrementCounter();
 
-
+        int number = m.getNextName();
         var clock = Instantiate(sampleObject, base_position, Quaternion.identity, c.transform);
-        clock.name = "Clock_" + m.i.ToString();
+        clock.name = "Clock_" + number.ToString();
         Text_Changer t_newclock = clock.GetComponentInChildren<Text_Changer>();
-        t_newclock.ChangeText(m.i.ToString());
+        t_newclock.ChangeText(number.ToString());
         Text_Changer t_oldlock = base_clock.GetComponentInChildren<Text_Changer>();
 
         t_newclock.x = t_oldlock.x + 1; //add one on the right
         t_newclock.y = t_oldlock.y;
+        t_newclock.N = number;
         m.matrice[t_newclock.x, t_newclock.y] = true;
 
         GameObject redcross = GetChildWithName(clock, "Delete");
@@ -46,6 +47,8 @@ public class Add_Clock_Plus : MonoBehaviour
 
     }
 
+   
+
     public void AddObjectTop()
     {
         GameObject base_clock;
@@ -53,7 +56,7 @@ public class Add_Clock_Plus : MonoBehaviour
 
         c = GameObject.FindWithTag("BaseCanvas");
         Main m = background.GetComponent<Main>();
-  
+
         Transform base_transform = gameObject.transform.parent;
         base_clock = base_transform.gameObject;
         base_position = base_clock.transform.position;
@@ -62,14 +65,16 @@ public class Add_Clock_Plus : MonoBehaviour
         m.incrementCounter();
 
 
+        int number = m.getNextName();
         var clock = Instantiate(sampleObject, base_position, Quaternion.identity, c.transform);
-        clock.name = "Clock_" + m.i.ToString();
+        clock.name = "Clock_" + number.ToString();
         Text_Changer t_newclock = clock.GetComponentInChildren<Text_Changer>();
-        t_newclock.ChangeText(m.i.ToString());
+        t_newclock.ChangeText(number.ToString());
         Text_Changer t_oldlock = base_clock.GetComponentInChildren<Text_Changer>();
 
         t_newclock.x = t_oldlock.x; //add one on the right
         t_newclock.y = t_oldlock.y + 1;
+        t_newclock.N = number;
         m.matrice[t_newclock.x, t_newclock.y] = true;
 
 
